@@ -1,4 +1,20 @@
+variable "region" {
+    description = "region for AWS"
+}
 
+variable "access_key" {
+    description = "access key for AWS"
+}
+
+variable "secret_key" {
+    description = "secret key for AWS"
+}
+
+provider "aws" {
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
+}
 
 # 1. Create vpc
 
@@ -132,7 +148,7 @@ resource "aws_instance" "web-server-instance" {
                 sudo apt update -y
                 sudo apt install apache2 -y
                 sudo systemctl start apache2
-                sudo bash -c 'echo your very first web server > /var/www/html/index.html'
+                sudo bash -c 'web server deployed with Terraform > /var/www/html/index.html'
                 EOF
   tags = {
     Name = "web-server"
